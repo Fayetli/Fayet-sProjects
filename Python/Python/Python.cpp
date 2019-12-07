@@ -207,14 +207,12 @@ void likeMove(int &x, int &y) {
 			break;
 		}
 		setEndXY(python[length - 1][0], python[length - 1][1]);
-		
 	}
 }
 
 int main()
 {
 	srand(time(NULL));
-
 
 	//buildWalls
 	for (int i = 0; i < a; i++) {
@@ -248,8 +246,6 @@ int main()
 	python[0][0] = x;
 	python[0][1] = y;
 
-	
-
 	//set Eat
 	setEat(x, y);
 	
@@ -260,73 +256,6 @@ int main()
 	bool cont = true;
 	
 	while (endGame) {
-
-		/*switch (_getch()) {
-		case UP:
-			if (checkWalls(x - 1, y) == 0) {
-				setXY(x, y);
-				cout << " ";
-				checkEat(x - 1, y);
-				movePython();
-				setXY(--x, y);
-				python[0][0] = x;
-				python[0][1] = y;
-				cout << (char)193;
-				lastMove = 2;
-			}
-			else setXY(x, y);
-			break;
-		case DOWN:
-			if (checkWalls(x + 1, y) == 0) {
-				setXY(x, y);
-				cout << " ";
-				checkEat(x + 1, y);
-				movePython();
-				setXY(++x, y);
-				python[0][0] = x;
-				python[0][1] = y;
-				cout << (char)194;
-				lastMove = 3;
-			}
-			else setXY(x, y);
-			break;
-		case RIGHT:
-			if (checkWalls(x, y + 1) == 0) {
-				setXY(x, y);
-				cout << " ";
-				checkEat(x, y + 1);
-				movePython();
-				setXY(x, ++y);
-				python[0][0] = x;
-				python[0][1] = y;
-				cout << (char)195;
-				lastMove = 4;
-			}
-			else setXY(x, y);
-			break;
-		case LEFT:
-			if (checkWalls(x, y - 1) == 0) {
-				setXY(x, y);
-				cout << " ";
-				checkEat(x, y - 1);
-				movePython();
-				setXY(x, --y);
-				python[0][0] = x;
-				python[0][1] = y;
-				cout << (char)180;
-				lastMove = 1;
-			}
-			else setXY(x, y);
-			break;
-		case Enter:
-			cont = 0;
-			break;
-		}
-		setEndXY(python[length - 1][0], python[length - 1][1]);
-		showEndXY(x, y);
-		showScore(x, y);
-		showXY(x, y);
-		showXYEat(xEat, yEat, x, y);*/
 		switch (_getch()) {
 		case UP:
 			if(lastMove != 3)
@@ -353,8 +282,4 @@ int main()
 			break;
 		}
 	}
-
-
-
-
-}
+} //285
