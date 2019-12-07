@@ -7,7 +7,7 @@
 
 using namespace std;
 
-int k = 0;
+bool endGame = 1;
 
 const int a = 12, b = 25;
 int xEat = 0, yEat = 0;
@@ -35,13 +35,6 @@ bool checkWalls(int x, int y) {
 	else return 0;
 }
 
-void showXY(short x, short y)
-{
-	setXY(a + 2, b + 2);
-	cout << "X:" << setw(3) << x << " Y:" << setw(3) << y;
-	setXY(x, y);
-}
-
 bool bsetEat = 1;
 void setEat(int x, int y) {
 	while (true) {
@@ -62,12 +55,6 @@ void setEat(int x, int y) {
 			}
 		}
 	}
-}
-
-void showXYEat(int xEat, int yEat, int x, int y) {
-	setXY(a + 3, b + 2);
-	cout << "X:" << setw(3) << xEat << " Y:" << setw(3) << yEat;
-	setXY(x, y);
 }
 
 bool eat = 0;
@@ -120,11 +107,13 @@ void showScore(int x, int y) {
 	cout << "Score:" << setw(3) << length - 1;
 	setXY(x, y);
 }
+
 void showEndXY(int x, int y) {
 	setXY(a + 5, b + 2);
 	cout << "eX:" << setw(2) << endX << "eY:" << setw(3) << endY;
 	setXY(x, y);
 }
+
 void showPythonCoord(int x, int y) {
 	setXY(a + 6, 0);
 	for (int i = 0; i < length; i++) {
@@ -132,8 +121,23 @@ void showPythonCoord(int x, int y) {
 	}
 	setXY(x, y);
 }
-/*void likeMove(int &x, int &y) {
-	while (true) {
+
+void showXY(short x, short y)
+{
+	setXY(a + 2, b + 2);
+	cout << "X:" << setw(3) << x << " Y:" << setw(3) << y;
+	setXY(x, y);
+}
+
+void showXYEat(int xEat, int yEat, int x, int y) {
+	setXY(a + 3, b + 2);
+	cout << "X:" << setw(3) << xEat << " Y:" << setw(3) << yEat;
+	setXY(x, y);
+}
+
+void likeMove(int &x, int &y) {
+	
+	while (endGame) {
 		switch (lastMove) {
 		case 2:
 			if (checkWalls(x - 1, y) == 0) {
@@ -145,10 +149,11 @@ void showPythonCoord(int x, int y) {
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)193;
-				Sleep(1000);
+				Sleep(200);
 			}
-			else
+			else {
 				lastMove = 0;
+			}
 			break;
 		case 3:
 			if (checkWalls(x + 1, y) == 0) {
@@ -160,7 +165,7 @@ void showPythonCoord(int x, int y) {
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)194;
-				Sleep(1000);
+				Sleep(200);
 			}
 			else
 				lastMove = 0;
@@ -175,7 +180,7 @@ void showPythonCoord(int x, int y) {
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)195;
-				Sleep(1000);
+				Sleep(200);
 			}
 			else
 				lastMove = 0;
@@ -190,17 +195,22 @@ void showPythonCoord(int x, int y) {
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)180;
-				Sleep(1000);
+				Sleep(200);
 			}
 			else
 				lastMove = 0;
 			break;
 		case 0:
-
+			setXY(a + 1, 0);
+			endGame = 0;
+			cout << "Good game!. Your score: " << length - 1;
 			break;
 		}
+		setEndXY(python[length - 1][0], python[length - 1][1]);
+		
 	}
-}*/
+}
+
 int main()
 {
 	srand(time(NULL));
@@ -244,14 +254,14 @@ int main()
 	setEat(x, y);
 	
 	//thread
-	//thread move(likeMove, ref(x), ref(y));
-	//Sleep(2000);
+	thread move(likeMove, ref(x), ref(y));
+	Sleep(2000);
 
 	bool cont = true;
 	
-	while (lastMove) {
+	while (endGame) {
 
-		switch (_getch()) {
+		/*switch (_getch()) {
 		case UP:
 			if (checkWalls(x - 1, y) == 0) {
 				setXY(x, y);
@@ -316,27 +326,33 @@ int main()
 		showEndXY(x, y);
 		showScore(x, y);
 		showXY(x, y);
-		showXYEat(xEat, yEat, x, y);
-
-		/*switch (_getch()) {
+		showXYEat(xEat, yEat, x, y);*/
+		switch (_getch()) {
 		case UP:
+			if(lastMove != 3)
 			lastMove = 2;
+			Sleep(200);
 			break;
 		case DOWN:
+			if (lastMove != 2)
 			lastMove = 3;
+			Sleep(200);
 			break;
 		case RIGHT:
+			if (lastMove != 1)
 			lastMove = 4;
+			Sleep(200);
 			break;
 		case LEFT:
+			if (lastMove != 4)
 			lastMove = 1;
+			Sleep(200);
 			break;
 		case Enter:
 			lastMove = 0;
 			break;
-		}*/
+		}
 	}
-
 
 
 
