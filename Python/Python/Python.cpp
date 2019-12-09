@@ -9,7 +9,7 @@ using namespace std;
 
 bool endGame = 1;
 
-const int a = 12, b = 25;
+const int a = 20, b = 30;
 int xEat = 0, yEat = 0;
 int lastMove = 5, endX = 0, endY = 0;
 
@@ -80,7 +80,7 @@ int python[(a - 2) * (b - 2)][2], length = 1;
 				setXY(python[i][0], python[i][1]);
 				cout << "#";
 			}
-			setXY(endX, endY);
+		 	setXY(endX, endY);
 			cout << " ";
 		}
 		else {
@@ -140,64 +140,61 @@ void showXYEat(int xEat, int yEat, int x, int y) {
 void likeMove(int &x, int &y) {
 	
 	while (endGame) {
+		Sleep(250);
 		switch (lastMove) {
 		case 2:
-			if (checkWalls(x - 1, y) == 0) {
 				setXY(x, y);
 				cout << " ";
 				checkEat(x - 1, y);
 				movePython();
+			if (checkWalls(x - 1, y) == 0) {
 				setXY(--x, y);
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)193;
-				Sleep(200);
 			}
 			else {
 				lastMove = 0;
 			}
 			break;
 		case 3:
-			if (checkWalls(x + 1, y) == 0) {
 				setXY(x, y);
 				cout << " ";
 				checkEat(x + 1, y);
 				movePython();
+			if (checkWalls(x + 1, y) == 0) {
 				setXY(++x, y);
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)194;
-				Sleep(200);
 			}
 			else
 				lastMove = 0;
 			break;
 		case 4:
-			if (checkWalls(x, y + 1) == 0) {
 				setXY(x, y);
 				cout << " ";
 				checkEat(x, y + 1);
 				movePython();
+			if (checkWalls(x, y + 1) == 0) {
 				setXY(x, ++y);
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)195;
-				Sleep(200);
 			}
 			else
 				lastMove = 0;
 			break;
 		case 1:
-			if (checkWalls(x, y - 1) == 0) {
 				setXY(x, y);
 				cout << " ";
 				checkEat(x, y - 1);
 				movePython();
+			if (checkWalls(x, y - 1) == 0) {
 				setXY(x, --y);
 				python[0][0] = x;
 				python[0][1] = y;
 				cout << (char)180;
-				Sleep(200);
 			}
 			else
 				lastMove = 0;
@@ -241,7 +238,6 @@ int main()
 	}
 
 	//set python
-	
 	while (true) {
 		x = 2 + rand() % a - 2;
 		y = 2 + rand() % b - 2;
@@ -264,7 +260,7 @@ int main()
 	bool cont = true;
 	
 	while (endGame) {
-
+		Sleep(50);
 		switch (_getch()) {
 		case UP:
 			if(lastMove != 3)
@@ -292,4 +288,9 @@ int main()
 			break;
 		}
 	}
+
+	//while (true) {
+	//	Sleep(10000);
+	//}
+	return 0;
 }
