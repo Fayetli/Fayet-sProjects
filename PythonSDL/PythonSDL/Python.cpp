@@ -24,8 +24,6 @@ namespace aye {
 				zone[i][0] = zone[i - 1][0];
 				zone[i][1] = zone[i - 1][1];
 			}
-			zone[length - 1][0] = endX;
-			zone[length - 1][1] = endY;
 		}
 		else {
 			for (int i = length; i > 0; i--) {
