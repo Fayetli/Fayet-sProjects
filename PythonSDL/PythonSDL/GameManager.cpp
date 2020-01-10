@@ -133,15 +133,19 @@ namespace aye {
 			else if (event.type == SDL_KEYDOWN) {
 				switch (event.key.keysym.sym) {
 				case SDLK_LEFT:
+					if((*python).length == 0 || (*python).lastMove != 4)
 					(*python).lastMove = 1;
 					return 0;
 				case SDLK_UP:
+					if ((*python).length == 0 || (*python).lastMove != 3)
 					(*python).lastMove = 2;
 					return 0;
 				case SDLK_DOWN:
+					if ((*python).length == 0 || (*python).lastMove != 2)
 					(*python).lastMove = 3;
 					return 0;
 				case SDLK_RIGHT:
+					if ((*python).length == 0 || (*python).lastMove != 1)
 					(*python).lastMove = 4;
 					return 0;
 				default:
