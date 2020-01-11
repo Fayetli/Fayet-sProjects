@@ -5,13 +5,13 @@ namespace aye {
 
 
 	Python::Python(){
-		length = NULL;
 		eat = NULL;
 		lastMove = NULL;
-		zone[0][0] = 1 + rand() % (Screen::SCREEN_WIDTH / 10 - 3);
-		zone[0][1] = 1 + rand() % (Screen::SCREEN_HEIGHT / 10 - 3);
-		endX = zone[0][0];
-		endY = zone[0][1];
+		c.resize(c.size() + 1);
+		c[0].x = 1 + rand() % (Screen::SCREEN_WIDTH / 10 - 3);
+		c[0].y = 1 + rand() % (Screen::SCREEN_HEIGHT / 10 - 3);
+		endX = c[0].x;
+		endY = c[0].y;
 	}
 	void Python::setEndXY(int x, int y) {
 		endX = x;
@@ -20,26 +20,17 @@ namespace aye {
 	void Python::movePython() {
 
 		if (eat == 1) {
-			for (int i = length; i > 0; i--) {
-				zone[i][0] = zone[i - 1][0];
-				zone[i][1] = zone[i - 1][1];
+			for (int i = c.size() - 1; i > 0; i--) {
+				c[i].x = c[i - 1].x;
+				c[i].y = c[i - 1].y;
 			}
 		}
 		else {
-			for (int i = length; i > 0; i--) {
-				zone[i][0] = zone[i - 1][0];
-				zone[i][1] = zone[i - 1][1];
+			for (int i = c.size() - 1; i > 0; i--) {
+				c[i].x = c[i - 1].x;
+				c[i].y = c[i - 1].y;
 			}
 		}
 	}
-	bool Python::checkMove() {
-		for (int i = 1; i <= length; i++) {
-			if (zone[i][0] == zone[0][0] && zone[i][1] == zone[0][1])
-				return 1;
-		}
-		if (zone[0][0] == 0 || zone[0][0] == Screen::SCREEN_WIDTH / 10 - 1 ||
-			zone[0][1] == 0 || zone[0][1] == Screen::SCREEN_HEIGHT / 10 - 1)
-			return 1;
-		else return 0;
-	}
+	
 }

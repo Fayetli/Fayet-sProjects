@@ -13,8 +13,8 @@ namespace aye {
 			eatx = 1 + rand() % (Screen::SCREEN_WIDTH / 10 - 3);
 			eaty = 1 + rand() % (Screen::SCREEN_HEIGHT / 10 - 3);	
 			quit1 = true;
-			for (int i = 0; i <= (*python).length; i++) {
-				if ((*python).zone[i][0] == eatx && (*python).zone[i][1] == eaty) {
+			for (int i = 0; i < (*python).c.size(); i++) {
+				if ((*python).c[i].x == eatx && (*python).c[i].y == eaty) {
 					quit1 = false;
 					break;
 				}
@@ -24,11 +24,12 @@ namespace aye {
 	}
 	void GameManager::checkEat() {
 		(*python).eat = 0;
-		if ((*map).zone[(*python).zone[0][0]][(*python).zone[0][1]] == 2) {
-			(*python).length = (*python).length + 1;
+		if ((*map).zone[(*python).c[0].x][(*python).c[0].y] == 2) {
+			(*python).c.resize((*python).c.size() + 1);
 			(*python).eat = 1;
-			(*map).zone[(*python).zone[0][0]][(*python).zone[0][1]] = 0;
-			///////////////////////setEat///////////////
+			int x = (*python).c[0].x;
+			int y = (*python).c[0].y;
+			(*map).zone[x][y] = 0;
 			setEat();
 		}
 	}
@@ -55,15 +56,18 @@ namespace aye {
 	void GameManager::printPython() {
 		for (int x = 0; x < Screen::SCREEN_WIDTH / 10; x++) {
 			for (int y = 0; y < Screen::SCREEN_HEIGHT / 10; y++) {
-				if (x == (*python).zone[0][0] && y == (*python).zone[0][1]) {
-					for (int i = 2; i < 9; i++) {
-						for (int j = 2; j < 9; j++) {
-							(*screen).setPixel(x * 10 + i, y * 10 + j, 0, 0, 0);
+				if (x == (*python).c[0].x && y == (*python).c[0].y) {
+					for (int i = 1; i < 10; i++) {
+						for (int j = 1; j < 10; j++) {
+							if(i == 1 || j == 1 || i == 9 || j == 9)
+								(*screen).setPixel(x * 10 + i, y * 10 + j, 255, 255, 255);
+							else
+								(*screen).setPixel(x * 10 + i, y * 10 + j, 0, 0, 0);
 						}
 					}
 				}
-				for (int l = 1; l <= (*python).length; l++) {
-					if (x == (*python).zone[l][0] && y == (*python).zone[l][1]) {
+				for (int l = 1; l < (*python).c.size(); l++) {
+					if (x == (*python).c[l].x && y == (*python).c[l].y) {
 						for (int i = 2; i < 9; i++) {
 							for (int j = 2; j < 9; j++) {
 								(*screen).setPixel(x * 10 + i, y * 10 + j, 0, 0, 255);
@@ -87,42 +91,46 @@ namespace aye {
 		switch ((*python).lastMove) {
 		case 1:
 			(*python).movePython();
-			(*python).zone[0][0] = (*python).zone[0][0] - 1;
-			(*python).zone[0][1] = (*python).zone[0][1];
+			(*python).c[0].x = (*python).c[0].x - 1;
+			(*python).c[0].y = (*python).c[0].y;
 			break;
 		case 2:
 			(*python).movePython();
-			(*python).zone[0][0] = (*python).zone[0][0];
-			(*python).zone[0][1] = (*python).zone[0][1] - 1;
+			(*python).c[0].x = (*python).c[0].x;
+			(*python).c[0].y = (*python).c[0].y - 1;
 			break;
 		case 3:
 			(*python).movePython();
-			(*python).zone[0][0] = (*python).zone[0][0];
-			(*python).zone[0][1] = (*python).zone[0][1] + 1;
+			(*python).c[0].x = (*python).c[0].x;
+			(*python).c[0].y = (*python).c[0].y + 1;
 			break;
 		case 4:
 			(*python).movePython();
-			(*python).zone[0][0] = (*python).zone[0][0] + 1;
-			(*python).zone[0][1] = (*python).zone[0][1];
+			(*python).c[0].x = (*python).c[0].x + 1;
+			(*python).c[0].y = (*python).c[0].y;
 			break;
 		default:
 			break;
 		}
-		(*python).setEndXY((*python).zone[(*python).length][0], (*python).zone[(*python).length][1]);
+		(*python).setEndXY((*python).c[(*python).c.size() - 1].x, (*python).c[(*python).c.size() - 1].y);
 	}
 	bool GameManager::checkMove() {
-		if ((*python).checkMove()) {
-			SDL_Delay(200);
-			(*screen).close();
-			return 1;
+		for (int i = 1; i < (*python).c.size(); i++) {
+			if ((*python).c[i].x == (*python).c[0].x && (*python).c[i].y == (*python).c[0].y)
+				return 1;
 		}
+		int x = (*python).c[0].x;
+		int y = (*python).c[0].y;
+		if ((*map).zone[x][y] == 1 )
+			return 1;
+		else return 0;
 	}
 	void GameManager::session() {
 		movePython();
-		checkEat();
 		printGrid();
 		printMap();
 		printPython();
+		checkEat();
 	}
 	bool GameManager::event(){
 		SDL_Event event;
@@ -133,19 +141,19 @@ namespace aye {
 			else if (event.type == SDL_KEYDOWN) {
 				switch (event.key.keysym.sym) {
 				case SDLK_LEFT:
-					if((*python).length == 0 || (*python).lastMove != 4)
+					if((*python).c.size() == 1 || (*python).lastMove != 4)
 					(*python).lastMove = 1;
 					return 0;
 				case SDLK_UP:
-					if ((*python).length == 0 || (*python).lastMove != 3)
+					if ((*python).c.size() == 1 || (*python).lastMove != 3)
 					(*python).lastMove = 2;
 					return 0;
 				case SDLK_DOWN:
-					if ((*python).length == 0 || (*python).lastMove != 2)
+					if ((*python).c.size() == 1 || (*python).lastMove != 2)
 					(*python).lastMove = 3;
 					return 0;
 				case SDLK_RIGHT:
-					if ((*python).length == 0 || (*python).lastMove != 1)
+					if ((*python).c.size() == 1 || (*python).lastMove != 1)
 					(*python).lastMove = 4;
 					return 0;
 				default:

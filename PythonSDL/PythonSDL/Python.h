@@ -5,22 +5,26 @@
 
 #include "Screen.h";
 #include "Map.h"
+#include <vector>
 
 namespace aye {
+	class Coord {
+	public:
+		int x;
+		int y;
+	};
 
 	class Python
 	{
 	public:
 		short int lastMove;
 		int endX, endY;
-		int length;
 		bool eat;
-		int zone[(Screen::SCREEN_WIDTH / 10) * (Screen::SCREEN_HEIGHT / 10)][2];
+		std::vector<Coord> c;
 	public:
 		Python();
 		void movePython();
 		void setEndXY(int x, int y);
-		bool checkMove();
 	};
 
 }

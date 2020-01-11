@@ -31,6 +31,8 @@ int main(int argv, char** argc) {
 		gm.session();
 
 		if (gm.checkMove()) {
+			SDL_Delay(500);
+			screen.close();
 			break;
 		}
 
@@ -40,9 +42,9 @@ int main(int argv, char** argc) {
 			break;
 		}
 		
-		SDL_Delay(200);
+		SDL_Delay(150);
 	}
 
-	std::cout << "Your score: " << python.length << std::endl;
+	std::cout << "Your score: " << python.c.size() - 1 << std::endl;
 	return 0;
 }
