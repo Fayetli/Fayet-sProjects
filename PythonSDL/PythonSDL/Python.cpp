@@ -1,15 +1,20 @@
 #include "Python.h"
 #include <cstdlib>
+#include "Settings.h"
 
 namespace aye {
 
 
 	Python::Python(){
+		ultimate = startUltimatesCount;
+		speed = NULL;
+		speedUp = 1;
 		eat = NULL;
 		lastMove = NULL;
+		otherMove = NULL;
 		c.resize(c.size() + 1);
-		c[0].x = 1 + rand() % (Screen::SCREEN_WIDTH / 10 - 3);
-		c[0].y = 1 + rand() % (Screen::SCREEN_HEIGHT / 10 - 3);
+		c[0].x = 1 + rand() % (Screen::SCREEN_WIDTH / gridPixel - 3);
+		c[0].y = 1 + rand() % (Screen::SCREEN_HEIGHT / gridPixel - 3);
 		endX = c[0].x;
 		endY = c[0].y;
 	}
@@ -31,6 +36,7 @@ namespace aye {
 				c[i].y = c[i - 1].y;
 			}
 		}
+		
 	}
 	
 }

@@ -4,14 +4,15 @@
 
 #include "SDL.h"
 #include <iostream>
+#include "Settings.h"
 
 namespace aye {
 
 	class Screen
 	{
 	public:
-		const static int SCREEN_WIDTH = 401;
-		const static int SCREEN_HEIGHT = 201;
+		const static int SCREEN_WIDTH = screen_width;
+		const static int SCREEN_HEIGHT = screen_height;
 		Uint32* buffer;
 		SDL_Window* window;
 		SDL_Renderer* renderer;

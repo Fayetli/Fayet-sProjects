@@ -8,7 +8,7 @@
 #include <vector>
 
 namespace aye {
-	class Coord {
+	struct Coord {
 	public:
 		int x;
 		int y;
@@ -17,6 +17,10 @@ namespace aye {
 	class Python
 	{
 	public:
+		short int ultimate;
+		bool otherMove;
+		float speedUp;
+		short int speed;
 		short int lastMove;
 		int endX, endY;
 		bool eat;

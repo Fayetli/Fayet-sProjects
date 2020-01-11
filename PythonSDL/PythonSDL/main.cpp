@@ -3,6 +3,7 @@
 #include "Python.h"
 #include "Map.h"
 #include "GameManager.h"
+#include "Settings.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -15,14 +16,17 @@ int main(int argv, char** argc) {
 	Screen screen;
 	if (screen.init())
 		return 1;
-	
+
 	Python python;
+	
 	Map map;
-	map.generateWalls();
+	map.generateWalls(wallsCount, python.c[0].x, python.c[0].y);
+	map.generateHiddenEat(hiddenEatCount, python.c[0].x, python.c[0].y);
+
 
 	GameManager gm(python, map, screen);
 	gm.setEat();
-	
+
 
 	bool quit = false;
 
@@ -38,13 +42,14 @@ int main(int argv, char** argc) {
 
 		screen.update();
 
+		SDL_Delay(50);
+
 		if (gm.event()) {
 			break;
 		}
 		
-		SDL_Delay(150);
+		SDL_Delay((startSpeed - python.speed) * (1.0/python.speedUp));
 	}
 
-	std::cout << "Your score: " << python.c.size() - 1 << std::endl;
 	return 0;
 }
