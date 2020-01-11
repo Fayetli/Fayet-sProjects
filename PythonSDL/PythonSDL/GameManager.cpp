@@ -27,7 +27,7 @@ namespace aye {
 	void GameManager::checkEat() {
 		(*python).eat = 0;
 		if ((*map).zone[(*python).c[0].x][(*python).c[0].y] == 2) {
-			if ((*python).speed < 150)
+			if ((*python).speed < startUnSpeed)
 				(*python).speed += pythonSpeedUp;
 			(*python).c.resize((*python).c.size() + 1);
 			(*python).eat = 1;
@@ -35,7 +35,7 @@ namespace aye {
 			int y = (*python).c[0].y;
 			(*map).zone[x][y] = 0;
 			setEat();
-			if ((*python).c.size() % (giveUltimate + 1) == 0 && (*python).ultimate < 4)
+			if ((*python).c.size() % giveUltimate - 1 == 0 && (*python).ultimate < 4)
 				(*python).ultimate = (*python).ultimate + 1;
 		}
 

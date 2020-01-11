@@ -42,13 +42,13 @@ int main(int argv, char** argc) {
 
 		screen.update();
 
-		SDL_Delay(50);
+		SDL_Delay(maxInterval);
 
 		if (gm.event()) {
 			break;
 		}
 		
-		SDL_Delay((startSpeed - python.speed) * (1.0/python.speedUp));
+		SDL_Delay((startUnSpeed - python.speed) * (1.0/python.speedUp));
 	}
 
 	return 0;
