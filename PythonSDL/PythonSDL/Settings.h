@@ -9,4 +9,4 @@ const float pythonSpeedUp = 0.02;//ускорение при получении еды
 const short int giveUltimate = 3;//к-ство необходимых для юльты хавки
 const short int hiddenEatCount = 2;//к-ство спрятаной хавки
 const short int startUltimatesCount = 0;//начальное к-ство ульты
-const short int maxInterval = 50;//min interval(max unspeed), < = >
+const short int minInterval = 30;//min interval(max unspeed), < = >

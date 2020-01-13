@@ -42,7 +42,7 @@ int main(int argv, char** argc) {
 
 		screen.update();
 
-		SDL_Delay(maxInterval);
+		SDL_Delay(minInterval);
 
 		if (gm.event()) {
 			break;

@@ -14,7 +14,7 @@ namespace aye {
 		for (int x = 0; x < Screen::SCREEN_WIDTH / gridPixel; x++) {
 			for (int y = 0; y < Screen::SCREEN_HEIGHT / gridPixel; y++) {
 				if (x == 0 || y == 0 || x == Screen::SCREEN_WIDTH / gridPixel - 1 || y == Screen::SCREEN_HEIGHT / gridPixel - 1)
-					zone[x][y] = 1;
+					zone[x][y] = 3;//unbreakble walls
 			}
 		}
 		while (wallsCount) {

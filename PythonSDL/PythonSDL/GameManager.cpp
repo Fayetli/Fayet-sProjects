@@ -44,7 +44,7 @@ namespace aye {
 	void GameManager::printMap() {
 		for (int x = 0; x < Screen::SCREEN_WIDTH / gridPixel; x++) {
 			for (int y = 0; y < Screen::SCREEN_HEIGHT / gridPixel; y++) {
-				if ((*map).zone[x][y] == 1) {
+				if ((*map).zone[x][y] == 1 || (*map).zone[x][y] == 3 ){
 					for (int i = 1; i < gridPixel; i++) {
 						for (int j = 1; j < gridPixel; j++) {
 							(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 0, 255, 0);
@@ -155,6 +155,9 @@ namespace aye {
 			}
 			else
 				return 1;
+		}
+		else if ((*map).zone[x][y] == 3) {
+			return 1;
 		}
 		else return 0;
 	}
