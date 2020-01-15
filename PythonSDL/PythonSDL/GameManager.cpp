@@ -26,8 +26,8 @@ namespace aye {
 	}
 	void GameManager::checkEat() {
 		(*python).eat = 0;
-		if ((*map).zone[(*python).c[0].x][(*python).c[0].y] == 2) {
-			if ((*python).speed < startUnSpeed)
+		if ((*map).zone[(*python).c[0].x][(*python).c[0].y] == 2) {//walls
+			if ((*python).speed - startUnSpeed > pythonSpeedUp)
 				(*python).speed += pythonSpeedUp;
 			(*python).c.resize((*python).c.size() + 1);
 			(*python).eat = 1;
@@ -35,7 +35,7 @@ namespace aye {
 			int y = (*python).c[0].y;
 			(*map).zone[x][y] = 0;
 			setEat();
-			if ((*python).c.size() % giveUltimate - 1 == 0 && (*python).ultimate < 4)
+			if ((*python).c.size() % giveUltimate - 1 == 0 && (*python).ultimate < 3)//give ulrimate
 				(*python).ultimate = (*python).ultimate + 1;
 		}
 
@@ -47,14 +47,14 @@ namespace aye {
 				if ((*map).zone[x][y] == 1 || (*map).zone[x][y] == 3 ){
 					for (int i = 1; i < gridPixel; i++) {
 						for (int j = 1; j < gridPixel; j++) {
-							(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 0, 255, 0);
+							(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 0, 255, 0);//walls
 						}
 					}
 				}
 				if ((*map).zone[x][y] == 2) {
 					for (int i = 1; i < gridPixel; i++) {
 						for (int j = 1; j < gridPixel; j++) {
-							(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 255, 0, 0);
+							(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 255, 0, 0);//eat
 						}
 					}
 				}
@@ -81,9 +81,9 @@ namespace aye {
 					for (int i = 1; i < gridPixel; i++) {
 						for (int j = 1; j < gridPixel; j++) {
 							if(i == 1 || j == 1 || i == gridPixel - 1 || j == gridPixel - 1)
-								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 255, 255, 255);
+								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 255, 255, 255);//around head og python 
 							else
-								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, red, green, blue);
+								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, red, green, blue);//head Of Python
 						}
 					}
 				}
@@ -91,7 +91,7 @@ namespace aye {
 					if (x == (*python).c[l].x && y == (*python).c[l].y) {
 						for (int i = 2; i < gridPixel - 1; i++) {
 							for (int j = 2; j < gridPixel - 1; j++) {
-								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 0, 0, 255);
+								(*screen).setPixel(x * gridPixel + i, y * gridPixel + j, 0, 0, 255);//python
 							}
 						}
 					}
@@ -103,14 +103,14 @@ namespace aye {
 		for (int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
 			for (int x = 0; x < Screen::SCREEN_WIDTH; x++) {
 				if (!(x % gridPixel == 0 || y % gridPixel == 0)) {
-					(*screen).setPixel(x, y, 255, 255, 255);
+					(*screen).setPixel(x, y, 0, 255, 255);//background
 				}
 			}
 		}
 	}
 	void GameManager::movePython() {
 		if (!(*python).otherMove) {
-			(*python).speedUp += 0.03;
+			(*python).speedUp += oneLineSpeedUp;
 		}
 		else (*python).speedUp = 1;
 		(*python).otherMove = 0;

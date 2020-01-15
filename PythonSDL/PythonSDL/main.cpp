@@ -21,7 +21,7 @@ int main(int argv, char** argc) {
 	
 	Map map;
 	map.generateWalls(wallsCount, python.c[0].x, python.c[0].y);
-	map.generateHiddenEat(hiddenEatCount, python.c[0].x, python.c[0].y);
+	map.generateHiddenEat(hiddenEatCount, python.c[0].x, python.c[0].y);//bug here
 
 
 	GameManager gm(python, map, screen);

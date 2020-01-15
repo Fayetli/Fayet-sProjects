@@ -6,7 +6,7 @@ namespace aye {
 	Map::Map() {
 		for (int x = 0; x < Screen::SCREEN_WIDTH / gridPixel; x++) {
 			for (int y = 0; y < Screen::SCREEN_HEIGHT / gridPixel; y++) {
-				zone[x][y] = 0;
+				zone[x][y] = 0;//init
 			}
 		}
 	}
@@ -17,7 +17,7 @@ namespace aye {
 					zone[x][y] = 3;//unbreakble walls
 			}
 		}
-		while (wallsCount) {
+		while (wallsCount) {//breakble walls
 			int x = 2 + rand() % (Screen::SCREEN_WIDTH / gridPixel - 5);
 			int y = 2 + rand() % (Screen::SCREEN_HEIGHT / gridPixel - 5);
 			bool goWall = 1;
