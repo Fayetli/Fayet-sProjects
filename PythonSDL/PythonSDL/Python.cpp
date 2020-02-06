@@ -24,18 +24,11 @@ namespace aye {
 	}
 	void Python::movePython() {
 
-		if (eat == 1) {
-			for (int i = c.size() - 1; i > 0; i--) {
-				c[i].x = c[i - 1].x;
-				c[i].y = c[i - 1].y;
-			}
+		for (int i = c.size() - 1; i > 0; i--) {
+			c[i].x = c[i - 1].x;
+			c[i].y = c[i - 1].y;
 		}
-		else {
-			for (int i = c.size() - 1; i > 0; i--) {
-				c[i].x = c[i - 1].x;
-				c[i].y = c[i - 1].y;
-			}
-		}
+
 		
 	}
 	

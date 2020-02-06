@@ -42,7 +42,7 @@ namespace aye {
 		SDL_RenderCopy(renderer, texture, NULL, NULL);
 		SDL_RenderPresent(renderer);
 
-		return 0;
+		return false;
 	}
 	void Screen::update() {
 		SDL_UpdateTexture(texture, NULL, buffer, SCREEN_WIDTH * sizeof(Uint32));

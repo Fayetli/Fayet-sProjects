@@ -103,7 +103,7 @@ namespace aye {
 		for (int y = 0; y < Screen::SCREEN_HEIGHT; y++) {
 			for (int x = 0; x < Screen::SCREEN_WIDTH; x++) {
 				if (!(x % gridPixel == 0 || y % gridPixel == 0)) {
-					(*screen).setPixel(x, y, 0, 255, 255);//background
+					(*screen).setPixel(x, y, 255, 255, 255);//background
 				}
 			}
 		}
@@ -143,7 +143,7 @@ namespace aye {
 	bool GameManager::checkMove() {
 		for (int i = 1; i < (*python).c.size(); i++) {
 			if ((*python).c[i].x == (*python).c[0].x && (*python).c[i].y == (*python).c[0].y)
-				return 1;
+				return true;
 		}
 		int x = (*python).c[0].x;
 		int y = (*python).c[0].y;
@@ -151,15 +151,15 @@ namespace aye {
 			if ((*python).ultimate != 0) {
 				(*map).zone[x][y] = 0;
 				(*python).ultimate = (*python).ultimate - 1;
-				return 0;
+				return false;
 			}
 			else
-				return 1;
+				return true;
 		}
 		else if ((*map).zone[x][y] == 3) {
-			return 1;
+			return true;
 		}
-		else return 0;
+		else return false;
 	}
 	void GameManager::session() {
 		movePython();
@@ -173,7 +173,7 @@ namespace aye {
 
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_QUIT)
-				return 1;
+				return true;
 			else if (event.type == SDL_KEYDOWN) {
 				switch (event.key.keysym.sym) {
 				case SDLK_LEFT:
@@ -181,27 +181,27 @@ namespace aye {
 						(*python).otherMove = true;
 					if ((*python).c.size() == 1 || (*python).lastMove != 4)
 						(*python).lastMove = 1;
-					return 0;
+					return false;
 				case SDLK_UP:
 					if ((*python).lastMove != 2)
 						(*python).otherMove = true;
 					if ((*python).c.size() == 1 || (*python).lastMove != 3)
 						(*python).lastMove = 2;
-					return 0;
+					return false;
 				case SDLK_DOWN:
 					if ((*python).lastMove != 3)
 						(*python).otherMove = true;
 					if ((*python).c.size() == 1 || (*python).lastMove != 2)
 						(*python).lastMove = 3;
-					return 0;
+					return false;
 				case SDLK_RIGHT:
 					if ((*python).lastMove != 4)
 						(*python).otherMove = true;
 					if ((*python).c.size() == 1 || (*python).lastMove != 1)
 						(*python).lastMove = 4;
-					return 0;
+					return false;
 				default:
-					return 0;
+					return false;
 				}
 			}
 		}

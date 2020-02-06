@@ -51,5 +51,5 @@ int main(int argv, char** argc) {
 		SDL_Delay((startUnSpeed - python.speed) * (1.0/python.speedUp));
 	}
 
-	return 0;
+	return false;
 }
