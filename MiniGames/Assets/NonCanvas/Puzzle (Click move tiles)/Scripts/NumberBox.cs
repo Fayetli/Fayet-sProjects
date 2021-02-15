@@ -5,7 +5,6 @@ using System;
 
 namespace ClickMovePuzzle
 {
-
     [RequireComponent(typeof(SpriteRenderer))]
     public class NumberBox : MonoBehaviour
     {

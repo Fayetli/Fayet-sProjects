@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/NonCanvas/Puzzle (Drag tiles)/Scenes/MainScene.unity
+    guid: 486e6943325c2834e9470e710fc736ee
   m_configObjects: {}

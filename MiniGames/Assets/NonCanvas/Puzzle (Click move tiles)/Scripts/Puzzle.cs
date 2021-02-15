@@ -5,7 +5,6 @@ using UnityEngine;
 namespace ClickMovePuzzle
 {
 
-
     public class Puzzle : MonoBehaviour
     {
         [SerializeField] private NumberBox boxPrefab;
@@ -21,8 +20,8 @@ namespace ClickMovePuzzle
         private void Start()
         {
             Init();
-            Shuffle(boxes);
-            UpdateTilesPos();
+
+            StartCoroutine(Shuffling(boxes, 5000));
         }
 
         void Init()
@@ -42,33 +41,33 @@ namespace ClickMovePuzzle
 
         }
 
-        public static void Shuffle<T>(T[,] array)
+        public IEnumerator Shuffling(NumberBox[,] arr, int depth)
         {
-            int lengthRow = array.GetLength(1);
+            Vector2 emptyPos = new Vector2(width - 1, height - 1);
 
-            for (int i = array.Length - 1; i > 0; i--)
+            int n = depth / 100;
+
+            for (int i = 1; i < depth + 1; i++)
             {
-                int i0 = i / lengthRow;
-                int i1 = i % lengthRow;
+                int dx = 0;
+                int dy = 0;
 
-                int j = Random.Range(0, i + 1);
-                int j0 = j / lengthRow;
-                int j1 = j % lengthRow;
+                if (emptyPos.x + 1 < width && Random.Range(0, 2) == 0)
+                    dx = 1;
+                else if (emptyPos.x - 1 >= 0 && Random.Range(0, 2) == 0)
+                    dx = -1;
+                else if (emptyPos.y + 1 < height && Random.Range(0, 2) == 0)
+                    dy = 1;
+                else if (emptyPos.y - 1 >= 0 && Random.Range(0, 2) == 0)
+                    dy = -1;
 
-                T temp = array[i0, i1];
-                array[i0, i1] = array[j0, j1];
-                array[j0, j1] = temp;
-            }
-        }
+                Vector2 newPos = emptyPos + new Vector2(dx, dy);
+                ClickToSwap((int)newPos.x, (int)newPos.y);
+                emptyPos = newPos;
 
-        private void UpdateTilesPos()
-        {
-            for (int y = 0; y < height; y++)
-            {
-                for (int x = 0; x < width; x++)
-                {
-                    boxes[x, y].UpdatePos(x, y);
-                }
+
+                if (i % n == 0)
+                    yield return new WaitForFixedUpdate();
             }
         }
 

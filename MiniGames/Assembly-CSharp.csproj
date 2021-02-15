@@ -64,14 +64,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\2D SpritePack\Demo\Scripts\CameraControlla.cs" />
-    <Compile Include="Assets\2D SpritePack\Demo\Scripts\Player.cs" />
-    <Compile Include="Assets\2D SpritePack\Demo\Scripts\Portal.cs" />
-    <Compile Include="Assets\2D SpritePack\Demo\Scripts\RestartLevel.cs" />
-    <Compile Include="Assets\2D SpritePack\Demo\Scripts\Saw.cs" />
+    <Compile Include="Assets\MeshCreating\MeshCreator.cs" />
     <Compile Include="Assets\NonCanvas\Puzzle (Click move tiles)\Scripts\NumberBox.cs" />
     <Compile Include="Assets\NonCanvas\Puzzle (Click move tiles)\Scripts\Puzzle.cs" />
-    <None Include="Assets\codeandweb.com\Readme.txt" />
+    <Compile Include="Assets\NonCanvas\Puzzle (Drag tiles)\Scripts\DragAndDrop.cs" />
+    <Compile Include="Assets\NonCanvas\Puzzle (Drag tiles)\Scripts\NumberBox.cs" />
+    <Compile Include="Assets\NonCanvas\Puzzle (Drag tiles)\Scripts\Puzzle.cs" />
+    <Compile Include="Assets\Packages\2D SpritePack\Demo\Scripts\CameraControlla.cs" />
+    <Compile Include="Assets\Packages\2D SpritePack\Demo\Scripts\Player.cs" />
+    <Compile Include="Assets\Packages\2D SpritePack\Demo\Scripts\Portal.cs" />
+    <Compile Include="Assets\Packages\2D SpritePack\Demo\Scripts\RestartLevel.cs" />
+    <Compile Include="Assets\Packages\2D SpritePack\Demo\Scripts\Saw.cs" />
+    <None Include="Assets\Packages\codeandweb.com\Readme.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>

@@ -64,8 +64,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\codeandweb.com\Editor\UIImageSetSizeAndPivot.cs" />
-    <None Include="Assets\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
+    <Compile Include="Assets\Packages\codeandweb.com\Editor\UIImageSetSizeAndPivot.cs" />
+    <None Include="Assets\Packages\codeandweb.com\Editor\SettingsTexturePackerImporter.txt" />
     <Reference Include="UnityEngine">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.16f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -274,7 +274,7 @@
       <HintPath>C:/Program Files (x86)/Microsoft Visual Studio Tools for Unity/16.0/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
     </Reference>
     <Reference Include="TexturePackerImporter">
-      <HintPath>C:/Users/Fayet/Documents/GitHub/Projects/MiniGames/Assets/codeandweb.com/Editor/TexturePackerImporter.dll</HintPath>
+      <HintPath>C:/Users/Fayet/Documents/GitHub/Projects/MiniGames/Assets/Packages/codeandweb.com/Editor/TexturePackerImporter.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>C:/Users/Fayet/Documents/GitHub/Projects/MiniGames/Library/PackageCache/com.unity.ext.nunit@1.0.5/net35/unity-custom/nunit.framework.dll</HintPath>
